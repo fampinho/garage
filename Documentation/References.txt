@@ -5,3 +5,7 @@ https://www.holistics.io/blog/top-5-free-database-diagram-design-tools/
 https://beginnersbook.com/2015/05/normalization-in-dbms/
 
 https://www.google.com/imgres?imgurl=https%3A%2F%2Fd2slcw3kip6qmk.cloudfront.net%2Fmarketing%2Fpages%2Fchart%2Fexamples%2Ferdiagramexample.png&imgrefurl=https%3A%2F%2Fwww.lucidchart.com%2Fpages%2Ftemplates%2Fer-diagram&tbnid=k57LKWLZPQYGaM&vet=12ahUKEwj375yoxuHpAhXIXxUIHb3gCYkQMygAegUIARDKAQ..i&docid=640b5F7MO-KURM&w=1640&h=1280&q=er%20diagram%20examples&ved=2ahUKEwj375yoxuHpAhXIXxUIHb3gCYkQMygAegUIARDKAQ
+
+http://omerio.com/2008/06/24/mapping-er-model-into-jpa-annotations/
+
+https://stackabuse.com/guide-to-jpa-with-hibernate-basic-mapping/
