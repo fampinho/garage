@@ -8,7 +8,7 @@ import cct.ie.garage.enums.Role;
 /**
  *
  */
-public class Login extends Vehicle {
+public class Login {
 
 	private Integer id;
 	private String username;
