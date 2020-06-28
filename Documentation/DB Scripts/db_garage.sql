@@ -1,4 +1,4 @@
-CREATE TABLE `garage_test`.`login` (
+CREATE TABLE `db_garage`.`login` (
   `id` int NOT NULL AUTO_INCREMENT,
   `username` varchar(20) NOT NULL,
   `password` varchar(20) NOT NULL,
@@ -7,7 +7,7 @@ CREATE TABLE `garage_test`.`login` (
   UNIQUE KEY `id_UNIQUE` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE `garage_test`.`customer` (
+CREATE TABLE `db_garage`.`customer` (
   `id` int NOT NULL AUTO_INCREMENT,
   `ppsn` varchar(9) DEFAULT NULL,
   `phone` varchar(10) DEFAULT NULL,
@@ -19,7 +19,7 @@ CREATE TABLE `garage_test`.`customer` (
   CONSTRAINT `FK_login_customer` FOREIGN KEY (`login_id`) REFERENCES `login` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE `garage_test`.`customer_name` (
+CREATE TABLE `db_garage`.`customer_name` (
   `customer_id` int NOT NULL,
   `name` varchar(10) NOT NULL,
   `mid_name` varchar(20) DEFAULT NULL,
@@ -29,7 +29,7 @@ CREATE TABLE `garage_test`.`customer_name` (
   CONSTRAINT `FK_customer_customer_name` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE `garage_test`.`staff` (
+CREATE TABLE `db_garage`.`staff` (
   `id` int NOT NULL AUTO_INCREMENT,
   `ppsn` varchar(9) NOT NULL,
   `salary` float NOT NULL,
@@ -41,7 +41,7 @@ CREATE TABLE `garage_test`.`staff` (
   CONSTRAINT `FK_login_staff` FOREIGN KEY (`login_id`) REFERENCES `login` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE `garage_test`.`staff_name` (
+CREATE TABLE `db_garage`.`staff_name` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(10) NOT NULL,
   `mid_name` varchar(20) DEFAULT NULL,
@@ -53,7 +53,7 @@ CREATE TABLE `garage_test`.`staff_name` (
   CONSTRAINT `FK_staff_staff_name` FOREIGN KEY (`staff_id`) REFERENCES `staff` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE `garage_test`.`vehicle` (
+CREATE TABLE `db_garage`.`vehicle` (
   `id` int NOT NULL AUTO_INCREMENT,
   `model` varchar(16) NOT NULL,
   `maker` varchar(16) NOT NULL,
@@ -65,7 +65,7 @@ CREATE TABLE `garage_test`.`vehicle` (
   CONSTRAINT `FK_customer_vehicle` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE `garage_test`.`car_licence` (
+CREATE TABLE `db_garage`.`car_licence` (
   `vehicle_id` int NOT NULL,
   `licence_number` varchar(10) NOT NULL,
   `manufacture` varchar(4) NOT NULL,
@@ -75,7 +75,7 @@ CREATE TABLE `garage_test`.`car_licence` (
   CONSTRAINT `FK_vehicle_car_licence` FOREIGN KEY (`vehicle_id`) REFERENCES `vehicle` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE `garage_test`.`booking` (
+CREATE TABLE `db_garage`.`booking` (
   `id` int NOT NULL AUTO_INCREMENT,
   `type` varchar(14) NOT NULL,
   `appointment` timestamp NOT NULL,
@@ -91,7 +91,7 @@ CREATE TABLE `garage_test`.`booking` (
   CONSTRAINT `FK_staff_booking` FOREIGN KEY (`staff_id`) REFERENCES `staff` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE `garage_test`.`service` (
+CREATE TABLE `db_garage`.`service` (
   `id` int NOT NULL AUTO_INCREMENT,
   `type` varchar(30) NOT NULL,
   `date_in` timestamp NOT NULL,
@@ -106,7 +106,7 @@ CREATE TABLE `garage_test`.`service` (
   CONSTRAINT `FK_booking_service` FOREIGN KEY (`booking_id`) REFERENCES `booking` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE `garage_test`.`stock` (
+CREATE TABLE `db_garage`.`stock` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(30) NOT NULL,
   `quantity` int NOT NULL,
