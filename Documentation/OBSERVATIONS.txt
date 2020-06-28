@@ -1,0 +1,3 @@
+Change id(vehicle_id -> car_licence) reference on Java / DB / Diagrams
+
+SET NOT NULL ATTIBUTES ON CUSTOMER TABLE
