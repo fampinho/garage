@@ -49,7 +49,6 @@ public class Vehicle {
 		this.fuel = fuel;
 		this.licenceNumber = licenceNumber;
 		this.manufacture = manufacture;
-//		this.customer.setId(01);
 	}
 
 	public Integer getId() {

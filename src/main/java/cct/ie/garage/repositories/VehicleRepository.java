@@ -1,4 +1,4 @@
-package cct.ie.garage.application;
+package cct.ie.garage.repositories;
 
 import org.springframework.data.repository.CrudRepository;
 
