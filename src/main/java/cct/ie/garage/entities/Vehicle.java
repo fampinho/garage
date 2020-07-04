@@ -34,16 +34,16 @@ public class Vehicle {
 	@Column(table = "car_licence")
 	private String manufacture;
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn(name = "customer_id")
-	private Customer customer;
+//	@ManyToOne(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+//	@JoinColumn(name = "customer_id")
+//	private Customer customer;
 
 	public Vehicle() {
 
 	}
 
 	public Vehicle(String maker, String model, Fuel fuel, String licenceNumber, String manufacture) {
-		this.customer = new Customer();
+//		this.customer = new Customer();
 		this.maker = maker;
 		this.model = model;
 		this.fuel = fuel;
@@ -99,12 +99,12 @@ public class Vehicle {
 		this.licenceNumber = licenceNumber;
 	}
 
-	public Customer getCustomer() {
-		return customer;
-	}
-
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
+//	public Customer getCustomer() {
+//		return customer;
+//	}
+//
+//	public void setCustomer(Customer customer) {
+//		this.customer = customer;
+//	}
 
 }

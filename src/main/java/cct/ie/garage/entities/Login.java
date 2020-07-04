@@ -3,20 +3,33 @@
  */
 package cct.ie.garage.entities;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+import org.hibernate.annotations.GenericGenerator;
+
 import cct.ie.garage.enums.Role;
 
 /**
  *
  */
+@Entity
 public class Login {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY, generator = "")
+	@GenericGenerator(name = "native", strategy = "native")
 	private Integer id;
 	private String username;
 	private String password;
-	private Enum<Role> role;
+	private Role role;
 
 	public Login() {
-		// TODO Auto-generated constructor stub
+		this.username = "famp";
+		this.password = "123";
+		this.role = Role.CUSTOMER;
 	}
 
 	public Integer getId() {
@@ -43,11 +56,11 @@ public class Login {
 		this.password = password;
 	}
 
-	public Enum<Role> getRole() {
+	public Role getRole() {
 		return role;
 	}
 
-	public void setRole(Enum<Role> role) {
+	public void setRole(Role role) {
 		this.role = role;
 	}
 
