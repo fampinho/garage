@@ -1,20 +1,20 @@
 package cct.ie.garage.entities;
 
-import java.security.Timestamp;
+import java.time.LocalDate;
 
 public class Service {
 
 	private Integer id;
 	private String type;
-	private Timestamp dateIn;
-	private Timestamp dateOut;
+	private LocalDate dateIn;
+	private LocalDate dateOut;
 	private Double price;
 	private String extraService;
 	private Double extraPrice;
 	private Stock stock;
 
 	public Service(Booking booking) {
-		this.type = booking.getType().toString();
+		this.type = booking.getServiceType().toString();
 		this.dateIn = booking.getAppointment();
 		this.dateOut = null;
 		this.price = null;
@@ -38,19 +38,19 @@ public class Service {
 		this.type = type;
 	}
 
-	public Timestamp getDateIn() {
+	public LocalDate getDateIn() {
 		return dateIn;
 	}
 
-	public void setDateIn(Timestamp dateIn) {
+	public void setDateIn(LocalDate dateIn) {
 		this.dateIn = dateIn;
 	}
 
-	public Timestamp getDateOut() {
+	public LocalDate getDateOut() {
 		return dateOut;
 	}
 
-	public void setDateOut(Timestamp dateOut) {
+	public void setDateOut(LocalDate dateOut) {
 		this.dateOut = dateOut;
 	}
 

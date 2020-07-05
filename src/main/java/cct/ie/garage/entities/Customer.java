@@ -1,24 +1,19 @@
 package cct.ie.garage.entities;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.SecondaryTable;
 
 import org.hibernate.annotations.GenericGenerator;
-
-import cct.ie.garage.enums.Fuel;
 
 @Entity
 @SecondaryTable(name = "customer_name", pkJoinColumns = @PrimaryKeyJoinColumn(name = "customer_id"))
@@ -43,41 +38,24 @@ public class Customer {
 	private String email;
 
 	@OneToMany(targetEntity = Vehicle.class, cascade = CascadeType.ALL)
-	@JoinColumn(name = "customer_id", referencedColumnName ="id", nullable = false)
+	@JoinColumn(name = "customer_id", referencedColumnName = "id", nullable = false)
 	private List<Vehicle> vehicles;
-//	private Booking booking;
-
-//	@OneToOne(cascade = CascadeType.ALL)
-//	@JoinColumn(name = "login_id", referencedColumnName = "id")
-//	private Login login;
+	
+//	private List<Booking booking;
 
 	public Customer() {
-//		this.name = "Fabio";
-//		this.surname = "Pimentel";
-//		this.phone = "000";
-//		this.email = "test@gmail.com";
-//		this.vehicle.add(new Vehicle("Honda", "Civic", Fuel.ELETRIC, "354adasda", "2018"));
 	}
 
 	public Customer(String ppsn, String name, String midName, String surname, String phone, String email,
 			List<Vehicle> vehicles) {
-//		this.vehicles = new ArrayList<Vehicle>();
-//		this.login = new Login();
 		this.ppsn = ppsn;
 		this.name = name;
-		this.midName = midName; 
+		this.midName = midName;
 		this.surname = surname;
 		this.phone = phone;
 		this.email = email;
 		this.vehicles = (vehicles);
 
-//		this.ppsn = "354354sa";
-//		this.name = "Fabio";
-//		this.midName = midName;
-//		this.surname = "Pimentel";
-//		this.phone = "000";
-//		this.email = "test@gmail.com";
-//		this.vehicles.add(new Vehicle("Honda", "Civic", Fuel.ELETRIC, "354adasda", "2018"));
 	}
 
 	public Integer getId() {

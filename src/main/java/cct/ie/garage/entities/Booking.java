@@ -1,20 +1,67 @@
 package cct.ie.garage.entities;
 
-import java.security.Timestamp;
+import java.time.LocalDate;
 
-import cct.ie.garage.enums.ServiceType;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+
+import org.hibernate.annotations.GenericGenerator;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+
 import cct.ie.garage.enums.ServiceStatus;
+import cct.ie.garage.enums.ServiceType;
 
+@Entity
 public class Booking {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
+	@GenericGenerator(name = "native", strategy = "native")
 	private Integer id;
-	private Enum<ServiceType> type;
-	private Timestamp appointment;
-	private Enum<ServiceStatus> status;
+
+	@Column(name = "type")
+	private ServiceType serviceType;
+
+	@JsonDeserialize(using = LocalDateDeserializer.class)
+	@JsonSerialize(using = LocalDateSerializer.class)
+	private LocalDate appointment;
+	
+//	@Column(name = "status")
+//	private ServiceStatus serviceStatus;
+	
 	private String description;
+
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "staff_id", referencedColumnName = "id")
 	private Staff staff;
 
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "customer_id", referencedColumnName = "id", nullable = false)
+	private Customer customer;
+
+	public Booking() {
+
+	}
+
+	public Booking(ServiceType serviceType, LocalDate appointment, String description, Customer customer) {
+		this.serviceType = serviceType;
+		this.appointment = appointment;
+		this.description = description;
+		this.customer = customer;
+	}
+
 	public String generateService(Booking booking) {
-		
+
 		return null;
 	}
 
@@ -26,29 +73,29 @@ public class Booking {
 		this.id = id;
 	}
 
-	public Enum<ServiceType> getType() {
-		return type;
+	public ServiceType getServiceType() {
+		return serviceType;
 	}
 
-	public void setType(Enum<ServiceType> type) {
-		this.type = type;
+	public void setServiceType(ServiceType serviceType) {
+		this.serviceType = serviceType;
 	}
 
-	public Timestamp getAppointment() {
+	public LocalDate getAppointment() {
 		return appointment;
 	}
 
-	public void setAppointment(Timestamp appointment) {
+	public void setAppointment(LocalDate appointment) {
 		this.appointment = appointment;
 	}
 
-	public Enum<ServiceStatus> getStatus() {
-		return status;
-	}
-
-	public void setStatus(Enum<ServiceStatus> status) {
-		this.status = status;
-	}
+//	public ServiceStatus getServiceStatus() {
+//		return serviceStatus;
+//	}
+//
+//	public void setServiceStatus(ServiceStatus serviceStatus) {
+//		this.serviceStatus = serviceStatus;
+//	}
 
 	public String getDescription() {
 		return description;
@@ -65,6 +112,13 @@ public class Booking {
 	public void setStaff(Staff staff) {
 		this.staff = staff;
 	}
-	
-	
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
 }
