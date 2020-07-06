@@ -6,5 +6,4 @@ import cct.ie.garage.entities.Staff;
 
 public interface StaffRepository extends CrudRepository<Staff, Integer> {
 
-//	List<Customer> findAll();
 }

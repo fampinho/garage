@@ -6,5 +6,4 @@ import cct.ie.garage.entities.Booking;
 
 public interface BookingRepository extends CrudRepository<Booking, Integer> {
 
-//	List<Customer> findAll();
 }

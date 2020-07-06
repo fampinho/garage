@@ -16,7 +16,6 @@ import cct.ie.garage.repositories.CustomerRepository;
 @Controller // This means that this class is a Controller
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping(path = "/garage") // This means URL's start with /demo (after Application path)
-//@EnableJpaRepositories("cct.ie.garage.*")
 @EntityScan("cct.ie.garage.*")
 public class CustomerController {
 	// This means to get the bean called userRepository

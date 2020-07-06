@@ -40,7 +40,7 @@ public class Customer {
 	@OneToMany(targetEntity = Vehicle.class, cascade = CascadeType.ALL)
 	@JoinColumn(name = "customer_id", referencedColumnName = "id", nullable = false)
 	private List<Vehicle> vehicles;
-	
+
 //	private List<Booking booking;
 
 	public Customer() {
@@ -128,14 +128,6 @@ public class Customer {
 //
 //	public void setBooking(Booking booking) {
 //		this.booking = booking;
-//	}
-
-//	public Login getLogin() {
-//		return login;
-//	}
-//
-//	public void setLogin(Login login) {
-//		this.login = login;
 //	}
 
 }

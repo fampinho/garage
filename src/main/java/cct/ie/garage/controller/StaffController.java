@@ -10,14 +10,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import cct.ie.garage.entities.Customer;
 import cct.ie.garage.entities.Staff;
 import cct.ie.garage.repositories.StaffRepository;
 
 @Controller // This means that this class is a Controller
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping(path = "/garage") // This means URL's start with /demo (after Application path)
-//@EnableJpaRepositories("cct.ie.garage.*")
 @EntityScan("cct.ie.garage.*")
 public class StaffController {
 	// This means to get the bean called userRepository

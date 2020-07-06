@@ -18,7 +18,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 
-import cct.ie.garage.enums.ServiceStatus;
+import cct.ie.garage.enums.BookingStatus;
 import cct.ie.garage.enums.ServiceType;
 
 @Entity
@@ -35,10 +35,10 @@ public class Booking {
 	@JsonDeserialize(using = LocalDateDeserializer.class)
 	@JsonSerialize(using = LocalDateSerializer.class)
 	private LocalDate appointment;
-	
-//	@Column(name = "status")
-//	private ServiceStatus serviceStatus;
-	
+
+	@Column(name = "status")
+	private BookingStatus bookingStatus;
+
 	private String description;
 
 	@OneToOne(cascade = CascadeType.ALL)
@@ -56,13 +56,9 @@ public class Booking {
 	public Booking(ServiceType serviceType, LocalDate appointment, String description, Customer customer) {
 		this.serviceType = serviceType;
 		this.appointment = appointment;
+		this.bookingStatus = BookingStatus.BOOKED;
 		this.description = description;
 		this.customer = customer;
-	}
-
-	public String generateService(Booking booking) {
-
-		return null;
 	}
 
 	public Integer getId() {
@@ -89,13 +85,13 @@ public class Booking {
 		this.appointment = appointment;
 	}
 
-//	public ServiceStatus getServiceStatus() {
-//		return serviceStatus;
-//	}
-//
-//	public void setServiceStatus(ServiceStatus serviceStatus) {
-//		this.serviceStatus = serviceStatus;
-//	}
+	public BookingStatus getBookingStatus() {
+		return bookingStatus;
+	}
+
+	public void setBookingStatus(BookingStatus bookingStatus) {
+		this.bookingStatus = bookingStatus;
+	}
 
 	public String getDescription() {
 		return description;

@@ -1,6 +1,3 @@
-/**
- * 
- */
 package cct.ie.garage.entities;
 
 import javax.persistence.CascadeType;
@@ -15,9 +12,6 @@ import org.hibernate.annotations.GenericGenerator;
 
 import cct.ie.garage.enums.Role;
 
-/**
- *
- */
 @Entity
 public class Login {
 
@@ -28,18 +22,19 @@ public class Login {
 	private String username;
 	private String password;
 	private Role role;
-	
+
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "customer_id", referencedColumnName = "id")
 	private Customer customer;
-	
+
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "staff_id", referencedColumnName = "id")
 	private Staff staff;
 
 	public Login() {
-		
+
 	}
+
 	public Login(String user, String password) {
 		this.username = user;
 		this.password = password;
@@ -93,5 +88,4 @@ public class Login {
 		this.staff = staff;
 	}
 
-	
 }

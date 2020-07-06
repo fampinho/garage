@@ -2,24 +2,53 @@ package cct.ie.garage.entities;
 
 import java.time.LocalDate;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+import org.hibernate.annotations.GenericGenerator;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+
+import cct.ie.garage.enums.ServiceType;
+
+@Entity
 public class Service {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
+	@GenericGenerator(name = "native", strategy = "native")
 	private Integer id;
-	private String type;
+
+	private ServiceType type;
+
+	@JsonDeserialize(using = LocalDateDeserializer.class)
+	@JsonSerialize(using = LocalDateSerializer.class)
 	private LocalDate dateIn;
+
+	@JsonDeserialize(using = LocalDateDeserializer.class)
+	@JsonSerialize(using = LocalDateSerializer.class)
 	private LocalDate dateOut;
+
 	private Double price;
+
+	@Column(name = "extra_service")
 	private String extraService;
+
+	@Column(name = "extra_price")
 	private Double extraPrice;
-	private Stock stock;
+
+	// private Stock stock;
 
 	public Service(Booking booking) {
-		this.type = booking.getServiceType().toString();
+		this.type = booking.getServiceType();
 		this.dateIn = booking.getAppointment();
-		this.dateOut = null;
 		this.price = null;
-		this.extraPrice = null;
-		this.extraService = null;
 	}
 
 	public Integer getId() {
@@ -30,11 +59,11 @@ public class Service {
 		this.id = id;
 	}
 
-	public String getType() {
+	public ServiceType getType() {
 		return type;
 	}
 
-	public void setType(String type) {
+	public void setType(ServiceType type) {
 		this.type = type;
 	}
 
@@ -78,12 +107,12 @@ public class Service {
 		this.extraPrice = extraPrice;
 	}
 
-	public Stock getStock() {
-		return stock;
-	}
-
-	public void setStock(Stock stock) {
-		this.stock = stock;
-	}
+//	public Stock getStock() {
+//		return stock;
+//	}
+//
+//	public void setStock(Stock stock) {
+//		this.stock = stock;
+//	}
 
 }
