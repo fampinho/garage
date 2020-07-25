@@ -4,7 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -13,7 +16,7 @@ import cct.ie.garage.entities.Login;
 import cct.ie.garage.repositories.LoginRepository;
 
 @Controller // This means that this class is a Controller
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 @RequestMapping(path = "/garage") // This means URL's start with /demo (after Application path)
 @EntityScan("cct.ie.garage.*")
 public class LoginController {
@@ -23,21 +26,61 @@ public class LoginController {
 	private LoginRepository loginRepository;
 
 	@PostMapping(path = "/login") // Map ONLY POST Requests
-	public @ResponseBody String login(@RequestBody Login login) {
+	public @ResponseBody Login login(@RequestBody Login login) {
 		// @ResponseBody means the returned String is the response, not a view name
 		// @RequestParam means it is a parameter from the GET or POST request
 
-//		Login n = new Login(login.getUsername(), login.getPassword());
-		if (loginRepository.auth(login.getUsername(), login.getPassword()) != null) {
-			return "Authenticated";
+		
+		Login authenticated = loginRepository.auth(login.getUsername(), login.getPassword());
+		if (authenticated != null) {
+			return authenticated;
 		}
-		return "Username or Password incorret. Try again!";
+		return authenticated;
 
 	}
 
-//	@GetMapping(path = "/allVehicles")
-//	public @ResponseBody Iterable<Login> getAllVehicles() {
-//		// This returns a JSON or XML with the users
-//		return loginRepository.findAll();
-//	}
+	@PostMapping(path = "/register") 
+	public @ResponseBody String register(@RequestBody Login login) {
+		// @ResponseBody means the returned String is the response, not a view name
+		// @RequestParam means it is a parameter from the GET or POST request
+		
+		
+		loginRepository.createLogin(login.getUsername(), login.getPassword(), login.getRole()+"");
+		
+		return ("User " + login.getUsername() + " has been created!!");
+		
+	}
+
+	
+	
+	@DeleteMapping(path = "/deleteLogin") 
+	public @ResponseBody String deleteLogin(@RequestBody Login login) {
+		String user = login.getUsername();
+		loginRepository.delete(login);
+		return ("User " + user + " has been deleted!!");
+		
+	}
+	
+	@PutMapping(path = "/updateLogin") 
+	public @ResponseBody String updateLogin(@RequestBody Login login) {
+		String user = login.getUsername();
+		loginRepository.update(login.getPassword(), login.getUsername());
+		return ("User " + user + " has been updated!!");
+		
+	}
+
+	@GetMapping(path = "/findAll") 
+	public @ResponseBody Iterable<Login> findAll(@RequestBody Login login) {
+		
+		Iterable<Login> it = loginRepository.findAll();
+		return it;
+	}
+
+	@GetMapping(path = "/findByUser") 
+	public @ResponseBody Login findByUser(@RequestBody Login login) {
+		
+		return loginRepository.findByUser(login.getUsername());
+		
+	}
+
 }

@@ -10,7 +10,7 @@ import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import cct.ie.garage.enums.Role;
+import cct.ie.garage.enums.RoleType;
 
 @Entity
 public class Login {
@@ -21,7 +21,7 @@ public class Login {
 	private Integer id;
 	private String username;
 	private String password;
-	private Role role;
+	private RoleType role;
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "customer_id", referencedColumnName = "id")
@@ -64,11 +64,11 @@ public class Login {
 		this.password = password;
 	}
 
-	public Role getRole() {
+	public RoleType getRole() {
 		return role;
 	}
 
-	public void setRole(Role role) {
+	public void setRole(RoleType role) {
 		this.role = role;
 	}
 

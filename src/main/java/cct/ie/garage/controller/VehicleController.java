@@ -3,20 +3,21 @@ package cct.ie.garage.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cct.ie.garage.entities.Vehicle;
-import cct.ie.garage.enums.Fuel;
+import cct.ie.garage.enums.FuelType;
 import cct.ie.garage.repositories.VehicleRepository;
 
 @Controller // This means that this class is a Controller
-@CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping(path = "/garage") // This means URL's start with /demo (after Application path)
+//@CrossOrigin(origins = "http://localhost:4200")
+@RequestMapping(path = "/garage/vehicle") // This means URL's start with /demo (after Application path)
 @EntityScan("cct.ie.garage.*")
 public class VehicleController {
 	// This means to get the bean called userRepository
@@ -29,12 +30,36 @@ public class VehicleController {
 		// @ResponseBody means the returned String is the response, not a view name
 		// @RequestParam means it is a parameter from the GET or POST request
 
-		Vehicle n = new Vehicle(vehicle.getMaker(), vehicle.getModel(), Fuel.DIESEL, "00000000", "2020");
+//		Vehicle n = new Vehicle(vehicle.getMaker(), vehicle.getModel(), FuelType.DIESEL, vehicle.getLicenceNumber(), vehicle.getManufacture(), vehicle.getType());
+		Vehicle n = new Vehicle(vehicle.getMaker(), vehicle.getModel(), vehicle.getFuel(), vehicle.getType());
 		vehicleRepository.save(n);
 		return "Saved";
 	}
 
-	@GetMapping(path = "/allVehicles")
+	@DeleteMapping(path = "/deleteVehicle")
+	public @ResponseBody String deleteVehicle(@RequestBody Vehicle vehicle) {
+		vehicleRepository.delete(vehicle);
+		return ("User has been deleted!!");
+
+	}
+
+	@PutMapping(path = "/updateVehicle")
+	public @ResponseBody String updateVehicle(@RequestBody Vehicle vehicle) {
+//		vehicleRepository.update(vehicle.getLicenceNumber(), vehicle.getMaker(), vehicle.getModel(), vehicle.getFuel(),
+//				vehicle.getManufacture(), vehicle.getType());
+		return ("User has been updated!!");
+
+	}
+	
+	@GetMapping(path = "/findByLicence")
+	public @ResponseBody Vehicle findByLicence(@RequestBody Vehicle vehicle) {
+
+		return null;
+//				vehicleRepository.findByLicence(vehicle.getLicenceNumber());
+
+	}
+
+	@GetMapping(path = "/findAll")
 	public @ResponseBody Iterable<Vehicle> getAllVehicles() {
 		// This returns a JSON or XML with the users
 		return vehicleRepository.findAll();

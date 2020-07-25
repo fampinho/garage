@@ -10,7 +10,8 @@ import javax.persistence.SecondaryTable;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import cct.ie.garage.enums.Fuel;
+import cct.ie.garage.enums.FuelType;
+import cct.ie.garage.enums.VehicleType;
 
 @Entity
 @SecondaryTable(name = "car_licence", pkJoinColumns = @PrimaryKeyJoinColumn(name = "vehicle_id"))
@@ -22,7 +23,8 @@ public class Vehicle {
 	private Integer id;
 	private String maker;
 	private String model;
-	private Fuel fuel;
+	private FuelType fuel;
+	private VehicleType type;
 
 	@Column(name = "licence_number", table = "car_licence")
 	private String licenceNumber;
@@ -30,16 +32,29 @@ public class Vehicle {
 	@Column(table = "car_licence")
 	private String manufacture;
 
-	public Vehicle() {
-
-	}
-
-	public Vehicle(String maker, String model, Fuel fuel, String licenceNumber, String manufacture) {
+	public Vehicle(String maker, String model, FuelType fuel, String licenceNumber, String manufacture,
+			VehicleType vehicleType) {
 		this.maker = maker;
 		this.model = model;
 		this.fuel = fuel;
 		this.licenceNumber = licenceNumber;
 		this.manufacture = manufacture;
+		this.type = vehicleType;
+
+	}
+
+	public Vehicle() {
+
+	}
+
+//	public Vehicle(String maker, String model, FuelType fuel, String licenceNumber, String manufacture) {
+//	}
+
+	public Vehicle(String maker, String model, FuelType fuel, VehicleType type) {
+		this.maker = maker;
+		this.model = model;
+		this.fuel = fuel;
+		this.type = type;
 	}
 
 	public Integer getId() {
@@ -66,12 +81,20 @@ public class Vehicle {
 		this.model = model;
 	}
 
-	public Fuel getFuel() {
+	public FuelType getFuel() {
 		return fuel;
 	}
 
-	public void setFuel(Fuel fuel) {
+	public void setFuel(FuelType fuel) {
 		this.fuel = fuel;
+	}
+
+	public VehicleType getType() {
+		return type;
+	}
+
+	public void setType(VehicleType type) {
+		this.type = type;
 	}
 
 	public String getManufacture() {
