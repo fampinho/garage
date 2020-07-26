@@ -30,32 +30,32 @@ public class VehicleController {
 		// @ResponseBody means the returned String is the response, not a view name
 		// @RequestParam means it is a parameter from the GET or POST request
 
-//		Vehicle n = new Vehicle(vehicle.getMaker(), vehicle.getModel(), FuelType.DIESEL, vehicle.getLicenceNumber(), vehicle.getManufacture(), vehicle.getType());
-		Vehicle n = new Vehicle(vehicle.getMaker(), vehicle.getModel(), vehicle.getFuel(), vehicle.getType());
-		vehicleRepository.save(n);
+		vehicleRepository.create(vehicle.getMaker(), vehicle.getModel(), vehicle.getFuel().name(),
+				vehicle.getType().name(), 38/** TESTE - HARD CODE - ID CUSTOMER **/
+		);
 		return "Saved";
 	}
 
 	@DeleteMapping(path = "/deleteVehicle")
 	public @ResponseBody String deleteVehicle(@RequestBody Vehicle vehicle) {
-		vehicleRepository.delete(vehicle);
-		return ("User has been deleted!!");
+		vehicleRepository.delete(vehicle.getId());
+		return ("Vehicle has been deleted!!");
 
 	}
 
 	@PutMapping(path = "/updateVehicle")
 	public @ResponseBody String updateVehicle(@RequestBody Vehicle vehicle) {
-//		vehicleRepository.update(vehicle.getLicenceNumber(), vehicle.getMaker(), vehicle.getModel(), vehicle.getFuel(),
-//				vehicle.getManufacture(), vehicle.getType());
-		return ("User has been updated!!");
+		vehicleRepository.update(vehicle.getMaker(), vehicle.getModel(), vehicle.getFuel().name(),
+				vehicle.getType().name(), 32/** TESTE - HARD CODE - ID VEHICLE **/
+		);
+		return ("Vehicle has been updated!!");
 
 	}
-	
+
 	@GetMapping(path = "/findByLicence")
 	public @ResponseBody Vehicle findByLicence(@RequestBody Vehicle vehicle) {
 
-		return null;
-//				vehicleRepository.findByLicence(vehicle.getLicenceNumber());
+		return vehicleRepository.findByLicence(vehicle.getLicenceNumber());
 
 	}
 

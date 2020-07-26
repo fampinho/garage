@@ -2,13 +2,21 @@ package cct.ie.garage.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.SecondaryTable;
 
 import org.hibernate.annotations.GenericGenerator;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 
 import cct.ie.garage.enums.FuelType;
 import cct.ie.garage.enums.VehicleType;
@@ -20,6 +28,8 @@ public class Vehicle {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
 	@GenericGenerator(name = "native", strategy = "native")
+//	@JsonDeserialize(using = LocalDateDeserializer.class)
+//	@JsonSerialize(using = LocalDateSerializer.class)
 	private Integer id;
 	private String maker;
 	private String model;
@@ -30,8 +40,8 @@ public class Vehicle {
 	private String licenceNumber;
 
 	@Column(table = "car_licence")
-	private String manufacture;
-
+	private String manufacture;	
+	
 	public Vehicle(String maker, String model, FuelType fuel, String licenceNumber, String manufacture,
 			VehicleType vehicleType) {
 		this.maker = maker;
@@ -46,9 +56,6 @@ public class Vehicle {
 	public Vehicle() {
 
 	}
-
-//	public Vehicle(String maker, String model, FuelType fuel, String licenceNumber, String manufacture) {
-//	}
 
 	public Vehicle(String maker, String model, FuelType fuel, VehicleType type) {
 		this.maker = maker;
@@ -112,5 +119,15 @@ public class Vehicle {
 	public void setLicenceNumber(String licenceNumber) {
 		this.licenceNumber = licenceNumber;
 	}
+
+//	public Customer getCustomer() {
+//		return customer;
+//	}
+//
+//	public void setCustomer(Customer customer) {
+//		this.customer = customer;
+//	}
+	
+	
 
 }
