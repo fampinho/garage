@@ -2,6 +2,8 @@ package cct.ie.garage.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -33,7 +35,9 @@ public class Vehicle {
 	private Integer id;
 	private String maker;
 	private String model;
+	@Enumerated(EnumType.STRING)
 	private FuelType fuel;
+	@Enumerated(EnumType.STRING)
 	private VehicleType type;
 
 	@Column(name = "licence_number", table = "car_licence")

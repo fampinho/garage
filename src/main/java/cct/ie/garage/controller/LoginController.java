@@ -1,5 +1,7 @@
 package cct.ie.garage.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.stereotype.Controller;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cct.ie.garage.entities.Login;
@@ -52,7 +55,7 @@ public class LoginController {
 	}
 
 	
-	
+		
 	@DeleteMapping(path = "/deleteLogin") 
 	public @ResponseBody String deleteLogin(@RequestBody Login login) {
 		String user = login.getUsername();
@@ -76,10 +79,10 @@ public class LoginController {
 		return it;
 	}
 
-	@GetMapping(path = "/findByUser") 
-	public @ResponseBody Login findByUser(@RequestBody Login login) {
+	@GetMapping(path = "/findById") 
+	public @ResponseBody Optional<Login> findById(@RequestParam int id) {
 		
-		return loginRepository.findByUser(login.getUsername());
+		return loginRepository.findById(id);
 		
 	}
 

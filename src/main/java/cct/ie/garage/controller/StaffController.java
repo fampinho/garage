@@ -1,11 +1,14 @@
 package cct.ie.garage.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -14,8 +17,7 @@ import cct.ie.garage.entities.Staff;
 import cct.ie.garage.repositories.StaffRepository;
 
 @Controller // This means that this class is a Controller
-@CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping(path = "/garage") // This means URL's start with /demo (after Application path)
+@RequestMapping(path = "/garage/staff") // This means URL's start with /demo (after Application path)
 @EntityScan("cct.ie.garage.*")
 public class StaffController {
 	// This means to get the bean called userRepository
@@ -23,8 +25,8 @@ public class StaffController {
 	@Autowired
 	private StaffRepository staffRepository;
 
-	@PostMapping(path = "/addStaff") // Map ONLY POST Requests
-	public @ResponseBody String addCustomer(@RequestBody Staff staff) {
+	@PostMapping(path = "/add") // Map ONLY POST Requests
+	public @ResponseBody String addStaff(@RequestBody Staff staff) {
 		// @ResponseBody means the returned String is the response, not a view name
 		// @RequestParam means it is a parameter from the GET or POST request
 
@@ -33,8 +35,29 @@ public class StaffController {
 		return "Saved";
 	}
 
-	@GetMapping(path = "/allStaffs")
-	public @ResponseBody Iterable<Staff> getAllStaffs() {
+	@DeleteMapping(path = "/del")
+	public @ResponseBody String delete(@RequestBody Staff staff) {
+		staffRepository.deleteById(staff.getId());
+		return ("Staff has been deleted!!");
+
+	}
+
+	@PutMapping(path = "/update")
+	public @ResponseBody String updateStaff(@RequestBody Staff staff) {
+		staffRepository.update(staff.getPpsn(), staff.getId());
+		return ("Staff has been updated!!");
+
+	}
+
+	@GetMapping(path = "/findById")
+	public @ResponseBody Optional<Staff> findById(@RequestBody Staff staff) {
+
+		return staffRepository.findById(staff.getId());
+
+	}
+
+	@GetMapping(path = "/findAll")
+	public @ResponseBody Iterable<Staff> findAll() {
 		// This returns a JSON or XML with the users
 		return staffRepository.findAll();
 	}

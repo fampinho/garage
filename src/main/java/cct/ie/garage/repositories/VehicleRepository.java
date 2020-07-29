@@ -7,7 +7,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
 import cct.ie.garage.entities.Vehicle;
-import cct.ie.garage.enums.VehicleType;
 
 public interface VehicleRepository extends CrudRepository<Vehicle, Integer> {
 

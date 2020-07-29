@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -30,6 +32,7 @@ public class Booking {
 	private Integer id;
 
 	@Column(name = "type")
+	@Enumerated(EnumType.STRING)
 	private ServiceType serviceType;
 
 	@JsonDeserialize(using = LocalDateDeserializer.class)
@@ -37,6 +40,7 @@ public class Booking {
 	private LocalDate appointment;
 
 	@Column(name = "status")
+	@Enumerated(EnumType.STRING)
 	private BookingStatus bookingStatus;
 
 	private String description;

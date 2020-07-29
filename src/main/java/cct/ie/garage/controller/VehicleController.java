@@ -12,11 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cct.ie.garage.entities.Vehicle;
-import cct.ie.garage.enums.FuelType;
 import cct.ie.garage.repositories.VehicleRepository;
 
 @Controller // This means that this class is a Controller
-//@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping(path = "/garage/vehicle") // This means URL's start with /demo (after Application path)
 @EntityScan("cct.ie.garage.*")
 public class VehicleController {
