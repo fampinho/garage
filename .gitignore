@@ -31,3 +31,4 @@ out/
 ### VS Code ###
 .vscode/
 Documentation/Interim Project/PowerPoint Slide Show - [Interim Project.pptx] - PowerPoint 2020-07-12 15-20-33.mp4
+*.mp4
