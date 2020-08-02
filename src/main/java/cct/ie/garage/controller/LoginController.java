@@ -17,10 +17,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import cct.ie.garage.entities.Login;
 import cct.ie.garage.repositories.LoginRepository;
+import cct.ie.responses.SuccessResponse;
 
 @Controller // This means that this class is a Controller
 @CrossOrigin(origins = "*")
-@RequestMapping(path = "/garage") // This means URL's start with /demo (after Application path)
+@RequestMapping(path = "/garage/login") // This means URL's start with /demo (after Application path)
 @EntityScan("cct.ie.garage.*")
 public class LoginController {
 	// This means to get the bean called userRepository
@@ -43,20 +44,20 @@ public class LoginController {
 	}
 
 	@PostMapping(path = "/register") 
-	public @ResponseBody String register(@RequestBody Login login) {
+	public @ResponseBody SuccessResponse register(@RequestBody Login login) {
 		// @ResponseBody means the returned String is the response, not a view name
 		// @RequestParam means it is a parameter from the GET or POST request
 		
 		
-		loginRepository.createLogin(login.getUsername(), login.getPassword(), login.getRole()+"");
+		loginRepository.createLogin(login.getUsername(), login.getPassword(), login.getRole().name(), login.getId());
 		
-		return ("User " + login.getUsername() + " has been created!!");
+		return new SuccessResponse("User " + login.getUsername() + " has been created!!");
 		
 	}
 
 	
 		
-	@DeleteMapping(path = "/deleteLogin") 
+	@DeleteMapping(path = "/del") 
 	public @ResponseBody String deleteLogin(@RequestBody Login login) {
 		String user = login.getUsername();
 		loginRepository.delete(login);
@@ -64,7 +65,7 @@ public class LoginController {
 		
 	}
 	
-	@PutMapping(path = "/updateLogin") 
+	@PutMapping(path = "/update") 
 	public @ResponseBody String updateLogin(@RequestBody Login login) {
 		String user = login.getUsername();
 		loginRepository.update(login.getPassword(), login.getUsername());

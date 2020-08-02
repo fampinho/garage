@@ -5,19 +5,23 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cct.ie.garage.entities.Customer;
 import cct.ie.garage.repositories.CustomerRepository;
+import cct.ie.responses.SuccessResponse;
 
 @Controller // This means that this class is a Controller
 @RequestMapping(path = "/garage/customer") // This means URL's start with /demo (after Application path)
+@CrossOrigin(origins = "http://localhost:8100")
 @EntityScan("cct.ie.garage.*")
 public class CustomerController {
 	// This means to get the bean called userRepository
@@ -26,14 +30,14 @@ public class CustomerController {
 	private CustomerRepository customerRepository;
 
 	@PostMapping(path = "/add") // Map ONLY POST Requests
-	public @ResponseBody String add(@RequestBody Customer customer) {
+	public @ResponseBody SuccessResponse add(@RequestBody Customer customer) {
 		// @ResponseBody means the returned String is the response, not a view name
 		// @RequestParam means it is a parameter from the GET or POST request
 
 		Customer n = new Customer(customer.getPpsn(), customer.getName(), customer.getMidName(), customer.getSurname(),
 				customer.getPhone(), customer.getEmail(), customer.getVehicles());
 		customerRepository.save(n);
-		return "Saved";
+		return new SuccessResponse("Customer "+ customer.getName() + " has been created!!");
 	}
 
 	@DeleteMapping(path = "/del")
@@ -44,16 +48,18 @@ public class CustomerController {
 	}
 
 	@PutMapping(path = "/update")
-	public @ResponseBody String updateCustomer(@RequestBody Customer customer) {
+	public @ResponseBody SuccessResponse updateCustomer(@RequestBody Customer customer) {
 		customerRepository.update(customer.getPpsn(), customer.getPhone(), customer.getEmail(), customer.getId());
-		return ("Customer has been updated!!");
+		customerRepository.updateName(customer.getName(), customer.getMidName(), customer.getSurname(),
+				customer.getId());
+		return new SuccessResponse("Customer "+ customer.getName() + " has been updated!!");
 
 	}
 
-	@GetMapping(path = "/findById")
-	public @ResponseBody Optional<Customer> findById(@RequestBody Customer customer) {
+	@GetMapping(path = "/findByPPSN")
+	public @ResponseBody Optional<Customer> findByPPSN(@RequestParam String ppsn) {
 
-		return customerRepository.findById(customer.getId());
+		return customerRepository.findByPPSN(ppsn);
 
 	}
 

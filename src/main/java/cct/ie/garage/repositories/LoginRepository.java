@@ -1,5 +1,7 @@
 package cct.ie.garage.repositories;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -19,10 +21,10 @@ public interface LoginRepository extends CrudRepository<Login, Integer> {
 	void update(@Param("key") String key, @Param("user") String user);
 
 	@Query("select l from Login l where l.username = :user")
-	Login findByUser(@Param("user") String user);
+	Optional<Login> findByUser(@Param("user") String user);
 
 	@Modifying
-	@Query(value = "insert into Login (username, password, role) values (:user, :key, :role)", nativeQuery = true)
+	@Query(value = "insert into Login (username, password, role, customer_id) values (:user, :key, :role, :idCust)", nativeQuery = true)
 	@Transactional
-	void createLogin(@Param("user") String user, @Param("key") String key, @Param("role") String role);
+	void createLogin(@Param("user") String user, @Param("key") String key, @Param("role") String role, @Param("idCust") Integer idCust);
 }
