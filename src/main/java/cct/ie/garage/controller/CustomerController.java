@@ -63,6 +63,13 @@ public class CustomerController {
 
 	}
 
+	@GetMapping(path = "/findById")
+	public @ResponseBody Optional<Customer> findById(@RequestParam int id) {
+		
+		return customerRepository.findById(id);
+		
+	}
+
 	@GetMapping(path = "/findAll")
 	public @ResponseBody Iterable<Customer> findAll() {
 		// This returns a JSON or XML with the users

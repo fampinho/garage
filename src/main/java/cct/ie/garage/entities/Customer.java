@@ -41,8 +41,6 @@ public class Customer {
 	@JoinColumn(name = "customer_id", referencedColumnName = "id", nullable = false)
 	private List<Vehicle> vehicles;
 
-//	private List<Booking booking;
-
 	public Customer() {
 	}
 
@@ -121,13 +119,5 @@ public class Customer {
 	public void setVehicles(List<Vehicle> vehicles) {
 		this.vehicles = vehicles;
 	}
-
-//	public Booking getBooking() {
-//		return booking;
-//	}
-//
-//	public void setBooking(Booking booking) {
-//		this.booking = booking;
-//	}
 
 }

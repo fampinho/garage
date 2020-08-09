@@ -3,6 +3,7 @@ package cct.ie.garage.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +17,7 @@ import cct.ie.garage.repositories.VehicleRepository;
 
 @Controller // This means that this class is a Controller
 @RequestMapping(path = "/garage/vehicle") // This means URL's start with /demo (after Application path)
+@CrossOrigin(origins = "*")
 @EntityScan("cct.ie.garage.*")
 public class VehicleController {
 	// This means to get the bean called userRepository

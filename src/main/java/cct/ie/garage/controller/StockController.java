@@ -14,7 +14,7 @@ import cct.ie.garage.entities.Stock;
 import cct.ie.garage.repositories.StockRepository;
 
 @Controller // This means that this class is a Controller
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 @RequestMapping(path = "/garage") // This means URL's start with /demo (after Application path)
 @EntityScan("cct.ie.garage.*")
 public class StockController {
