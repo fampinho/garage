@@ -1,6 +1,7 @@
 package cct.ie.garage.repositories;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -20,5 +21,14 @@ public interface BookingRepository extends CrudRepository<Booking, Integer> {
 	@Query(value = "update Booking b set b.status = ?1 where b.id = ?2 ", nativeQuery = true)
 	@Transactional
 	void cancel(String status, Integer id);
+
+	@Query(value = "select * from booking b where b.appointment = ?1", nativeQuery = true)
+	List<Booking> getAvailableStaff(LocalDate appointment);
+
+	@Query(value = "select * from booking b join customer c on (c.id = b.customer_id) join vehicle v on (v.customer_id = b.customer_id) where c.id = ?1	 order by b.id desc limit 1", nativeQuery = true)
+	Booking getCurrentBooking(String idCust);
+
+	@Query(value = "select * from booking where appointment = ?1", nativeQuery = true)
+	List<Booking> getTotalPerDay(LocalDate appointment);
 
 }

@@ -49,20 +49,39 @@ public class Booking {
 	@JoinColumn(name = "staff_id", referencedColumnName = "id")
 	private Staff staff;
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "customer_id", referencedColumnName = "id", nullable = false)
-	private Customer customer;
+	@Column(name = "vehicle_id")
+	private Integer idVehicle;
+
+	@Column(name = "customer_id")
+	private Integer idCustomer;
 
 	public Booking() {
 
 	}
 
-	public Booking(ServiceType serviceType, LocalDate appointment, String description, Customer customer) {
-		this.serviceType = serviceType;
+	public Booking(String serviceType, LocalDate appointment, String description, Integer idCustomer, Staff staff,
+			Integer idVehicle) {
+		switch (serviceType) {
+		case "ANNUAL_SERVICE":
+			this.serviceType = ServiceType.ANNUAL_SERVICE;
+			break;
+		case "MAJOR_REPAIR":
+			this.serviceType = ServiceType.MAJOR_REPAIR;
+			break;
+		case "MAJOR_SERVICE":
+			this.serviceType = ServiceType.MAJOR_SERVICE;
+			break;
+		case "REPAIR_FAULT":
+			this.serviceType = ServiceType.REPAIR_FAULT;
+			break;
+		}
+
 		this.appointment = appointment;
 		this.bookingStatus = BookingStatus.BOOKED;
 		this.description = description;
-		this.customer = customer;
+		this.idCustomer = idCustomer;
+		this.staff = staff;
+		this.idVehicle = idVehicle;
 	}
 
 	public Integer getId() {
@@ -113,12 +132,20 @@ public class Booking {
 		this.staff = staff;
 	}
 
-	public Customer getCustomer() {
-		return customer;
+	public Integer getIdCustomer() {
+		return idCustomer;
 	}
 
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
+	public void setIdCustomer(Integer idCustomer) {
+		this.idCustomer = idCustomer;
+	}
+
+	public Integer getIdVehicle() {
+		return idVehicle;
+	}
+
+	public void setIdVehicle(Integer idVehicle) {
+		this.idVehicle = idVehicle;
 	}
 
 }

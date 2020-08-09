@@ -15,4 +15,19 @@ public interface StaffRepository extends CrudRepository<Staff, Integer> {
 	@Transactional
 	void update(@Param("ppsn") String ppsn, @Param("id") int id);
 
+	@Modifying
+	@Query(value = "update staff_name s set s.name = :name, s.mid_name = :midName, s.surname = :surname "
+			+ "where s.staff_id = :id", nativeQuery = true)
+	@Transactional
+	void updateName(@Param("name") String name, @Param("midName") String midName, @Param("surname") String surname,
+			@Param("id") int id);
+
+	@Query("select min(s) from Staff s ")
+	Staff getAvailableStaff();
+
+	@Query("select sum(s) from Staff s ")
+	Integer getServiceTotal();
+
+	@Query(value = "select * from staff s join staff_name sn on (s.id = sn.staff_id) order by s.service_counter limit 1 ", nativeQuery = true)
+	Staff getSmallerServCounter();
 }
