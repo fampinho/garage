@@ -11,3 +11,5 @@ http://omerio.com/2008/06/24/mapping-er-model-into-jpa-annotations/
 https://stackabuse.com/guide-to-jpa-with-hibernate-basic-mapping/
 
 https://www.baeldung.com/jpa-mapping-single-entity-to-multiple-tables ***
+
+https://stackoverflow.com/questions/5767325/how-can-i-remove-a-specific-item-from-an-array
