@@ -1,10 +1,10 @@
-package cct.ie.exceptions;
+package cct.ie.responses;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(code = HttpStatus.NO_CONTENT)
-public class NoContentException extends RuntimeException {
+public class NoContentResponse extends RuntimeException {
 
 	/**
 	 * 
@@ -13,7 +13,7 @@ public class NoContentException extends RuntimeException {
 	
 	private String message;
 
-	public NoContentException(String msg) {
+	public NoContentResponse(String msg) {
 		this.message = msg;
 	}
 

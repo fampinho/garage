@@ -17,13 +17,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import cct.ie.exceptions.BookingServiceException;
 import cct.ie.garage.entities.Booking;
 import cct.ie.garage.entities.Staff;
 import cct.ie.garage.enums.BookingStatus;
 import cct.ie.garage.enums.ServiceType;
 import cct.ie.garage.repositories.BookingRepository;
 import cct.ie.garage.repositories.StaffRepository;
+import cct.ie.responses.BookingServiceResponse;
 import cct.ie.responses.SuccessResponse;
 
 @Controller // This means that this class is a Controller
@@ -65,16 +65,14 @@ public class BookingController {
 //			it means the service limit daily has been reached and throws  BookingServiceException
 			if (bCounter >= BOOKING_DAY_LIMIT || (bCounter >= BOOKING_MAJOR_REPAIR_LIMIT
 					&& booking.getServiceType() == ServiceType.MAJOR_REPAIR)) {
-				throw new BookingServiceException("Limit of booking's been reached for the date selected "
+				throw new BookingServiceResponse("Limit of booking's been reached for the date selected "
 						+ booking.getAppointment() + ". Try booking another day.");
 			}
 		}
 
+		//GET THE STAFF WITH THE SMALLER AMOUNT OF SERVICE COUNTER
 		Staff smallerServCounter = staffRepository.getSmallerServCounter();
 
-//		// GET THE STAFF WITH THE LOWEST AMOUNT OF SERVICE IN THE CURRENT DAY
-//		List<Booking> bookingStaff = bookingRepository.getAvailableStaff(booking.getAppointment());
-//
 		// INCREASE STAFF SERVICE COUNTER. ADD 2 IN CASE MAJOR REPAIR OTHERWISE ADD 1
 		if (booking.getServiceType().name().equalsIgnoreCase("MAJOR_REPAIR")) {
 			smallerServCounter.setCounter(smallerServCounter.getCounter() + 2);

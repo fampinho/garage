@@ -22,12 +22,6 @@ public interface StaffRepository extends CrudRepository<Staff, Integer> {
 	void updateName(@Param("name") String name, @Param("midName") String midName, @Param("surname") String surname,
 			@Param("id") int id);
 
-	@Query("select min(s) from Staff s ")
-	Staff getAvailableStaff();
-
-	@Query("select sum(s) from Staff s ")
-	Integer getServiceTotal();
-
 	@Query(value = "select * from staff s join staff_name sn on (s.id = sn.staff_id) order by s.service_counter limit 1 ", nativeQuery = true)
 	Staff getSmallerServCounter();
 }

@@ -1,5 +1,6 @@
 package cct.ie.garage.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,19 @@ public class StaffController {
 		// @ResponseBody means the returned String is the response, not a view name
 		// @RequestParam means it is a parameter from the GET or POST request
 
-		Staff n = new Staff(staff.getPpsn(), staff.getName(), staff.getMidName(), staff.getSurname());
+		List<Staff> staffList = (List<Staff>) staffRepository.findAll();
+		int avgServiceCounter;
+		int serviceTotal = 0;
+		int staffCounter = 0;
+
+		for (Staff s : staffList) {
+			serviceTotal += s.getCounter();
+			staffCounter++;
+		}
+
+		avgServiceCounter = serviceTotal / staffCounter;
+		Staff n = new Staff(staff.getPpsn(), staff.getName(), staff.getMidName(), staff.getSurname(),
+				avgServiceCounter);
 		staffRepository.save(n);
 		return new SuccessResponse("Saved");
 	}
@@ -66,8 +79,4 @@ public class StaffController {
 		return staffRepository.findAll();
 	}
 
-	protected Staff getAvailableStaff() {
-		// This returns a JSON or XML with the users
-		return staffRepository.getAvailableStaff();
-	}
 }

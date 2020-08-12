@@ -41,12 +41,13 @@ public class Staff {
 
 	}
 
-	public Staff(String ppsn, String name, String midName, String surname) {
+	public Staff(String ppsn, String name, String midName, String surname, Integer counter) {
 		this.ppsn = ppsn;
 		this.name = name;
 		this.midName = midName;
 		this.surname = surname;
 		this.salary = 1800D;
+		this.counter = counter;
 	}
 
 	public Integer getId() {
