@@ -13,3 +13,9 @@ https://stackabuse.com/guide-to-jpa-with-hibernate-basic-mapping/
 https://www.baeldung.com/jpa-mapping-single-entity-to-multiple-tables ***
 
 https://stackoverflow.com/questions/5767325/how-can-i-remove-a-specific-item-from-an-array
+
+https://www.scrumguides.org/docs/scrumguide/v2017/2017-Scrum-Guide-US.pdf#zoom=100
+
+https://www.scrum.org/resources/kanban-guide-scrum-teams
+
+https://docs.oracle.com/javaee/6/tutorial/doc/gijqy.html
