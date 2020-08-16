@@ -1,6 +1,5 @@
 package cct.ie.garage.controller;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,8 +26,8 @@ import cct.ie.responses.BookingServiceResponse;
 import cct.ie.responses.SuccessResponse;
 
 @Controller // This means that this class is a Controller
-@RequestMapping(path = "/garage/booking") // This means URL's start with /demo (after Application path)
-@CrossOrigin(origins = "*")
+@RequestMapping(path = "/garage/booking") // This means URL's start with (after Application path)
+@CrossOrigin(origins = "*") // Using (*) it allows request from any origin
 @EntityScan("cct.ie.garage.*")
 public class BookingController {
 	// This means to get the bean called userRepository
@@ -60,7 +59,8 @@ public class BookingController {
 					bCounter++;
 				}
 			}
-//			VERIFY Service Type: in case bCounter(booking counter) > = BOOKING_DAY_LIMIT or bCounter >= BOOKING_MAJOR_REPAIR_LIMIT and ServiceType = MAJOR_REPAIR,
+//			VERIFY Service Type: in case bCounter(booking counter) > = BOOKING_DAY_LIMIT or 
+//			bCounter >= BOOKING_MAJOR_REPAIR_LIMIT and ServiceType = MAJOR_REPAIR,
 //			 as MAJOR_REPAIR count as 2 services instead 1,
 //			it means the service limit daily has been reached and throws  BookingServiceException
 			if (bCounter >= BOOKING_DAY_LIMIT || (bCounter >= BOOKING_MAJOR_REPAIR_LIMIT
